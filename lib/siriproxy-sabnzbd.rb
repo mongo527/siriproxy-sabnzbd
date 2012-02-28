@@ -21,7 +21,7 @@ class SiriProxy::Plugin::Sabnzbd < SiriProxy::Plugin
     	begin
     		sab = sabParser("pause")
     		if sab["status"]
-    			say "Sabnzbd has paused all downloads"
+    			say "Sabnzbd has paused all downloads", spoken: "SabNZBD has paused all downloads"
     		elsif not sab["status"]
     			if sab["error"].downcase == "api key incorrect"
     				say "Sorry, the API Key is incorrect"

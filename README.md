@@ -39,7 +39,7 @@ Voice Commands
 Notes
 --
 
-This is the first time I used Ruby. I figured it would be a decent way to learn the language. So help me where you can! 
+This is the second time I used Ruby. I figured it would be a decent way to learn the language. So help me where you can! 
 
 Thanks!
 

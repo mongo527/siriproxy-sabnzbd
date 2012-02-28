@@ -106,25 +106,25 @@ class SiriProxy::Plugin::Sabnzbd < SiriProxy::Plugin
     listen_for /(what is|whats) downloading/i do
     	
     	begin
-    		sab = sabParser("queue")
-    		nzb = sab["queue"]["slots"]
-    		if not nzb.empty?
-				for i in nzb
-					say "#{i['filename']} is #{i['percentage']}% done", 
-					spoken: ""
-				end
-				say "The queue will be complete in #{sab['queue']['timeleft']}"
-			elsif nzb.empty?
-				say "Nothing is currently downloading"
-			else
-				if sab["error"].downcase == "api key incorrect"
-    				say "Sorry, the API Key is incorrect"
-    			elsif sab["error"].downcase == "api key required"
-    				say "Sorry, API Key was not given in the config file"
-    			else
-    				say "Sorry, I could not resume Sabnzbd",
-    				spoken: "Sorry, I could not resume Sab NZBD"
-    			end
+    		nzb = getQueue()
+    		say nzb.class
+    		#if nzb.kind_of? Array
+			#	for i in nzb
+			#		say "#{i['filename']} is #{i['percentage']}% done", 
+			#		spoken: ""
+			#	end
+			#	say "The queue will be complete in #{sab['queue']['timeleft']}"
+			#elsif nzb.empty?
+			#	say "Nothing is currently downloading"
+			#else
+			#	if sab["error"].downcase == "api key incorrect"
+    		#		say "Sorry, the API Key is incorrect"
+    		#	elsif sab["error"].downcase == "api key required"
+    		#		say "Sorry, API Key was not given in the config file"
+    		#	else
+    		#		say "Sorry, I could not resume Sabnzbd",
+    		#		spoken: "Sorry, I could not resume Sab NZBD"
+    		#	end
 			end
 		rescue Errno::EHOSTUNREACH
     		say "Sorry, I could not connect to Sabnzbd",
@@ -138,7 +138,28 @@ class SiriProxy::Plugin::Sabnzbd < SiriProxy::Plugin
             say "Sorry, The operation timed out"
         end
         request_completed
-    end	
+    end
+    
+    def getQueue()
+    	queue = Array.new
+    	begin
+			sab = sabParser("queue")
+			nzb = sab["queue"]["slots"]
+			
+			return nzb
+			
+		rescue Errno::EHOSTUNREACH
+    		return say "Sorry, I could not connect to Sabnzbd",
+    		spoken: "Sorry, I could not connect to Sab NZBD"
+    	rescue Errno::ECONNREFUSED
+    		return say "Sorry, Sabnzbd is not currently running",
+    		spoken: "Sorry, Sab NZBD is not currently running"
+    	rescue Errno::ENETUNREACH
+            return say "Sorry, Could not connect to the network"
+        rescue Errno::ETIMEDOUT
+            return say "Sorry, The operation timed out"
+        end
+    end
     
     def sabParser(cmd)
         

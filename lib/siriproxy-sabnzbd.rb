@@ -75,3 +75,4 @@ class SiriProxy::Plugin::Sabnzbd < SiriProxy::Plugin
         
         return result
     end
+end

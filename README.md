@@ -4,12 +4,12 @@ SiriProxy-Sabnzbd
 About
 --
 
-Allows you to control [Sabnzbd](http://sabnzbdd.org) with Siri!
+Allows you to control [Sabnzbd](http://sabnzbd.org) with Siri!
 
 Installation
 --
 
-1. Add the following to ~./siriproxy/config.yml
+1. Add the following to ~/.siriproxy/config.yml
 
   - name: 'Sabnzbd'
       git: 'git://github.com/mongo527/siriproxy-sabnzbd.git'

@@ -125,7 +125,7 @@ class SiriProxy::Plugin::Sabnzbd < SiriProxy::Plugin
     		#		say "Sorry, I could not resume Sabnzbd",
     		#		spoken: "Sorry, I could not resume Sab NZBD"
     		#	end
-			end
+			#end
 		rescue Errno::EHOSTUNREACH
     		say "Sorry, I could not connect to Sabnzbd",
     		spoken: "Sorry, I could not connect to Sab NZBD"

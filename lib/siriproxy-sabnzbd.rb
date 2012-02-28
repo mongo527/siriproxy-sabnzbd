@@ -75,6 +75,32 @@ class SiriProxy::Plugin::Sabnzbd < SiriProxy::Plugin
         request_completed
     end
     
+    listen_for /what is downloading/i do
+    	
+    	begin
+    		sab = sabParser("queue")
+    		nzb = sab["queue"]["slots"]
+    		if not nzb.empty?
+				for i in nzb
+					say "#{i['filename']} is #{i['percentage']}% done", 
+					spoken: ""
+				end
+				say "The queue will be complete in #{sab['queue']['timeleft']}"
+			end
+		rescue Errno::EHOSTUNREACH
+    		say "Sorry, I could not connect to Sabnzbd",
+    		spoken: "Sorry, I could not connect to Sab NZBD"
+    	rescue Errno::ECONNREFUSED
+    		say "Sorry, Sabnzbd is not currently running",
+    		spoken: "Sorry, Sab NZBD is not currently running"
+    	rescue Errno::ENETUNREACH
+            say "Sorry, Could not connect to the network"
+        rescue Errno::ETIMEDOUT
+            say "Sorry, The operation timed out"
+        end
+        request_completed
+    end	
+    
     def sabParser(cmd)
         
         url = "http://#{@host}:#{@port}/sabnzbd/api?mode=#{cmd}&output=json&apikey=#{@api_key}"

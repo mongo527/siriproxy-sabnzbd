@@ -22,7 +22,7 @@ class SiriProxy::Plugin::Sabnzbd < SiriProxy::Plugin
     		sab = sabParser("pause")
     		if sab["status"]
     			say "Sabnzbd has paused all downloads", 
-    			spoken: "SabN-Z-B-D has paused all downloads"
+    			spoken: "Sab NZBD has paused all downloads"
     		elsif not sab["status"]
     			if sab["error"].downcase == "api key incorrect"
     				say "Sorry, the API Key is incorrect"
@@ -30,7 +30,7 @@ class SiriProxy::Plugin::Sabnzbd < SiriProxy::Plugin
     				say "Sorry, API Key was not given in the config file"
     			else
     				say "Sorry, I could not pause Sabnzbd", 
-    				spoken: "Sorry, I could not pause SabNZBD"
+    				spoken: "Sorry, I could not pause Sab NZBD"
     			end
     		end
     	rescue Errno::EHOSTUNREACH
@@ -58,13 +58,15 @@ class SiriProxy::Plugin::Sabnzbd < SiriProxy::Plugin
     				say "Sorry, API Key was not given in the config file"
     			else
     				say "Sorry, I could not resume Sabnzbd",
-    				spoken: "Sorry, I could not resume SabNZBD"
+    				spoken: "Sorry, I could not resume Sab NZBD"
     			end
     		end
     	rescue Errno::EHOSTUNREACH
-    		say "Sorry, I could not connect to Sabnzbd"
+    		say "Sorry, I could not connect to Sabnzbd",
+    		spoken: "Sorry, I could not connect to Sab NZBD"
     	rescue Errno::ECONNREFUSED
-    		say "Sorry, Sabnzbd is not currently running"
+    		say "Sorry, Sabnzbd is not currently running",
+    		spoken: "Sorry, Sab NZBD is not currently running"
     	rescue Errno::ENETUNREACH
             say "Sorry, Could not connect to the network"
         rescue Errno::ETIMEDOUT

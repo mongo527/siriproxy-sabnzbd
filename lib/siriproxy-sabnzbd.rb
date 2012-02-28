@@ -17,7 +17,7 @@ class SiriProxy::Plugin::Sabnzbd < SiriProxy::Plugin
         @api_key = config["sab_api"]
     end
     
-    listen_for /pause (my downloads|saab|sab)/i do
+    listen_for /pause ((all|my) downloads|saab|sab)/i do
     	begin
     		sab = sabParser("pause")
     		if sab["status"]
@@ -45,7 +45,7 @@ class SiriProxy::Plugin::Sabnzbd < SiriProxy::Plugin
         request_completed
     end
     
-    listen_for /pause my downloads for (.+) minutes/i do |time|
+    listen_for /pause downloads for (.+) minutes/i do |time|
     	begin
     		sab = sabParser("config&name=set_pause&value=#{time}")
     		if sab["status"]

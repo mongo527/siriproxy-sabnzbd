@@ -29,6 +29,8 @@ class SiriProxy::Plugin::Sabnzbd < SiriProxy::Plugin
     				say "Sorry, API Key was not given in the config file"
     			else
     				say "Sorry, I could not pause Sab"
+    			end
+    		end
     	rescue Errno::EHOSTUNREACH
     		say "Sorry, I could not connect to Sabnzbd"
     	rescue Errno::ECONNREFUSED
@@ -53,6 +55,8 @@ class SiriProxy::Plugin::Sabnzbd < SiriProxy::Plugin
     				say "Sorry, API Key was not given in the config file"
     			else
     				say "Sorry, I could not resume Sab"
+    			end
+    		end
     	rescue Errno::EHOSTUNREACH
     		say "Sorry, I could not connect to Sabnzbd"
     	rescue Errno::ECONNREFUSED

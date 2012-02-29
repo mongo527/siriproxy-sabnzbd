@@ -75,7 +75,7 @@ class SiriProxy::Plugin::Sabnzbd < SiriProxy::Plugin
     
     listen_for /pause (.+)/i do |response|
     	begin
-			queue = sabParser("queue")
+			queue = sabParser("queue&name=queue")
 			nzb = queue["queue"]["slots"]
 			if not nzb.empty?
 				for i in nzb
@@ -156,7 +156,7 @@ class SiriProxy::Plugin::Sabnzbd < SiriProxy::Plugin
     
     listen_for /resume (.+)/i do |response|
     	begin
-			queue = sabParser("queue")
+			queue = sabParser("queue&name=queue")
 			nzb = queue["queue"]["slots"]
 			if not nzb.empty?
 				for i in nzb
@@ -208,7 +208,7 @@ class SiriProxy::Plugin::Sabnzbd < SiriProxy::Plugin
     listen_for /(what is|whats) downloading/i do
     	
     	begin
-    		sab = sabParser("queue")
+    		sab = sabParser("queue&name=queue")
 			nzb = sab["queue"]["slots"]
     		if not nzb.empty?
 				for i in nzb

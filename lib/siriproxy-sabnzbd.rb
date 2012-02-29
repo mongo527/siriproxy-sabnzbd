@@ -160,7 +160,7 @@ class SiriProxy::Plugin::Sabnzbd < SiriProxy::Plugin
 			nzb = queue["queue"]["slots"]
 			if not nzb.empty?
 				for i in nzb
-					if /(.*)(#{response})(.*)/.match(i["filename"].downcase) AND i["status"].downcase == "paused"
+					if /(.*)(#{response})(.*)/.match(i["filename"].downcase) && i["status"].downcase == "paused"
 						nzb = i["filename"]
 						nzbValue = i["nzo_id"]
 						success = true;

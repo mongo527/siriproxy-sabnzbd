@@ -121,6 +121,7 @@ class SiriProxy::Plugin::Sabnzbd < SiriProxy::Plugin
         rescue Errno::ETIMEDOUT
             say "Sorry, The operation timed out"
 		end
+		request_completed
 	end
     
     listen_for /resume (my downloads|saab|sab)/i do
@@ -201,6 +202,7 @@ class SiriProxy::Plugin::Sabnzbd < SiriProxy::Plugin
         rescue Errno::ETIMEDOUT
             say "Sorry, The operation timed out"
 		end
+		request_completed
 	end
     
     listen_for /(what is|whats) downloading/i do
